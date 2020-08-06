@@ -1,15 +1,15 @@
 const container = document.querySelector('.container');
 var inputValue = document.querySelector('.input');
 const add = document.querySelector('.add');
-const removeAll = document.querySelector('.removeAll');
+const removeAll = document.querySelectorAll('.removeAll');
 
-if(window.localStorage.getItem("todos") == undefined){
-     var todos = [];
-     window.localStorage.setItem("todos", JSON.stringify(todos));
-}
+if(window.localStorage.getItem("todos") == undefined){  
+    var todos = [];                                        
+     window.localStorage.setItem("todos", JSON.stringify(todos)); 
+    }                                                                        
 
-var todosEX = window.localStorage.getItem("todos");
-var todos = JSON.parse(todosEX);
+var todosEX = window.localStorage.getItem("todos"); 
+var todos = JSON.parse(todosEX); 
 
 class icon{
 	constructor(name){
@@ -17,23 +17,21 @@ class icon{
     }
     createIcon(name){
     var iconBox =document.createElement('div');
-    iconBox.classList.removeAll('icon');
+    iconBox.classList.add('icon');
 
     var removeAll = document.createElement('button');
-    removeAll.classList.add('remove');
+    removeAll.classList.add('removeAll');
     removeAll.innerHTML = "<img src=\"iconos/recycle-bin.svg\" width=\"40px\" height=\"40px\">";
-    removeAll.addEventListener('click', () => this.removeAll(iconBox, name));
+    removeAll.addEventListener('click', () => this.removeAll());
 
     container.appendChild(iconBox);
 
     iconBox.appendChild(removeAll);
 
     }
-    removeAll(itemBox, name){
-        itemBox.parentNode.removeChild(itemBox);
-        let index = todos.indexOf(name);
-        todos.splice(index );
-        window.localStorage.setItem("todos", JSON.stringify(todos));
+    removeAll(){
+        iconBox.parentNode.removeChild(iconBox);
+         window.localStorage.clear();
     }
 }
 
